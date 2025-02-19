@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import Link from 'next/link';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <header className="bg-slate-800 text-white py-4 shadow-md">
           <div className="container mx-auto px-4 flex items-center">
-            <a href="/" className="text-xl font-bold">arXiv-txt.org</a>
+            <Link href="/" className="text-xl font-bold">arXiv-txt.org</Link>
             <span className="ml-4 text-sm text-slate-300">LLM-friendly arXiv papers</span>
           </div>
         </header>

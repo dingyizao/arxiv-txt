@@ -52,7 +52,7 @@ export default function PaperPage({ params }) {
         <h2 className="text-2xl font-bold mb-4 text-red-600">Error</h2>
         <p className="mb-4">{error}</p>
         <p className="text-gray-700">
-          Please check that you've entered a valid arXiv paper ID.
+          Please check that you have entered a valid arXiv paper ID.
         </p>
       </div>
     );

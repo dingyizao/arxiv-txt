@@ -94,7 +94,7 @@ export const parseArxivResponse = (xmlData) => {
         month: 'long',
         day: 'numeric'
       });
-    } catch (e) {
+    } catch (_e) {
       return dateString;
     }
   };
