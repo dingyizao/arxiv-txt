@@ -94,8 +94,9 @@ export const parseArxivResponse = (xmlData) => {
         month: 'long',
         day: 'numeric'
       });
-    } catch (_e) {
-      return dateString;
+    } catch (e) {
+        console.error('Error formatting date:', e);
+        return dateString;
     }
   };
 
