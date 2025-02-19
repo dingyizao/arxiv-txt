@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -9,7 +10,7 @@ export const metadata = {
   description: 'Get arXiv papers in a format optimized for large language models instantly',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
