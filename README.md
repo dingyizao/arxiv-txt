@@ -1,4 +1,76 @@
+# arXiv-txt.org
+
+A simple tool that makes arXiv papers instantly available in LLM-friendly formats by just changing the URL.
+
+## How It Works
+
+1. Find a paper on arXiv: `https://arxiv.org/abs/2502.10248`
+2. Change the URL to: `https://arxiv-txt.org/abs/2502.10248`
+3. copy an LLM-optimized version
+
+## Development
+
+This project is built with Next.js and Tailwind CSS.
+
+### Prerequisites
+
+- Node.js (16.x or later)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/arxiv-txt.git
+cd arxiv-txt
+
+# Install dependencies
+npm install
+```
+
+### Development Server
+
+```bash
+npm run dev
+```
+
+This runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+## Deployment
+
+The site is configured for easy deployment on Vercel with the included `vercel.json` configuration.
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+```
+
+## Technical Implementation
+
+- **Frontend**: Next.js with App Router, React, and Tailwind CSS
+- **API Proxy**: Next.js API routes handle CORS and rate limiting
+- **Caching**: Response caching via Next.js and HTTP headers
+- **Deployment**: Vercel with custom configuration
+
+## Future Enhancements
+
+- Content extraction from PDFs
+- Equation and figure detection and processing
+- Citation extraction and formatting
+- User preferences (dark mode, etc.)
+- Accessibility improvements
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
 
 ## Getting Started
 
