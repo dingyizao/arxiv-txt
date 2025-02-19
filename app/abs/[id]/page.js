@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { use } from 'react';
 import { parseArxivResponse, generatePlainTextFormat } from '@/app/lib/arxiv';
 import Metadata from '@/app/components/Metadata';
 import LoadingState from '@/app/components/LoadingState';
 
 export default function PaperPage({ params }) {
-  const { id } = params;
+  const unwrappedParams = use(params);
+  const { id } = unwrappedParams;
   const [paper, setPaper] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
