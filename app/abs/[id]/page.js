@@ -6,7 +6,7 @@ import { parseArxivResponse, generatePlainTextFormat } from '@/app/lib/arxiv';
 import Metadata from '@/app/components/Metadata';
 import LoadingState from '@/app/components/LoadingState';
 import { Toaster, toast } from 'react-hot-toast';
-
+import Layout from '@/app/components/Layout';
 export default function PaperPage({ params }) {
   const unwrappedParams = use(params);
   const { id } = unwrappedParams;
@@ -207,6 +207,7 @@ export default function PaperPage({ params }) {
           </section>
         </div>
       </div>
+      <Layout></Layout>
     </>
   );
 }
