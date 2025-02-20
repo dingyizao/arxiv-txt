@@ -13,18 +13,39 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" >
       <body className={inter.className}>
-        <header className="bg-slate-800 text-white py-4 shadow-md">
-          <div className="container mx-auto px-4 flex items-center">
-            <Link href="/" className="text-xl font-bold">arXiv-txt.org</Link>
-            <span className="ml-4 text-sm text-slate-300">LLM-friendly arXiv papers</span>
+        <div className="drawer">
+          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content flex flex-col">
+            {/* Navbar */}
+            <div className="navbar bg-base-300">
+              <div className="flex-none lg:hidden">
+                <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </label>
+              </div>
+              <div className="flex-1 px-2 mx-2">
+                <Link href="/" className="text-xl font-bold">arXiv-txt.org</Link>
+                <span className="ml-4 text-sm opacity-70">LLM-friendly arXiv papers</span>
+              </div>
+            </div>
+            {/* Page content */}
+            <main className="container mx-auto px-4 py-8 max-w-3xl">
+              {children}
+              <Analytics />
+            </main>
           </div>
-        </header>
-        <main className="container mx-auto px-4 py-8 max-w-3xl">
-          {children}
-          <Analytics />
-        </main>
+          <div className="drawer-side">
+            <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+            <ul className="menu p-4 w-80 min-h-full bg-base-200">
+              <li><Link href="/">Home</Link></li>
+              {/* Add more menu items here */}
+            </ul>
+          </div>
+        </div>
       </body>
     </html>
   );

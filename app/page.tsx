@@ -1,8 +1,7 @@
 import { Highlight, themes } from "prism-react-renderer";
 
 export default function Home() {
-  const pythonCode = `
-import requests
+  const pythonCode = `import requests
 
 arxiv_url = "https://arxiv.org/abs/1706.03762"
 summary: str = requests.get(
@@ -16,45 +15,48 @@ print(summary)
 curl -o paper.txt https://arxiv-txt.org/raw/abs/1706.03762
 
 # Use with @simonw LLM library
-curl -s https://arxiv-txt.org/raw/abs/1706.03762 | llm -s "ELI5"
+curl -L https://arxiv-txt.org/raw/abs/1706.03762 | \\
+llm -s "ELI5"
 `;
 
 
   return (
-    <div className="flex flex-col items-center text-center max-w-2xl mx-auto py-12">
-      <h1 className="text-3xl font-bold mb-8">
+    <div className="container mx-auto px-4 py-12 flex flex-col items-center">
+      <h1 className="text-4xl font-bold mb-8">
         arXiv-txt.org
       </h1>
-      <p className="mb-6 text-gray-700">
+      <p className="text-lg opacity-90 mb-8">
         Make arXiv papers easily available in LLM-friendly formats.
       </p>
 
-      <div className="bg-white p-8 rounded-lg shadow-md w-full mb-8">
-        <h2 className="text-xl font-semibold mb-4">How It Works</h2>
-        <p className="mb-6 text-gray-700">
-          Just change <code className="bg-gray-100 px-2 py-1 rounded">arxiv.org</code> to
-          <code className="bg-gray-100 px-2 py-1 rounded ml-2">arxiv-txt.org</code> in the URL.
-        </p>
+      <div className="card bg-base-100 w-full max-w-2xl shadow-xl mb-8">
+        <div className="card-body">
+          <h2 className="card-title">How It Works</h2>
+          <p className="mb-6">
+            Just change <code className="badge badge-ghost">arxiv.org</code> to
+            <code className="badge badge-ghost ml-2">arxiv-txt.org</code> in the URL.
+          </p>
 
-        <div className="bg-gray-50 p-4 rounded-lg text-left">
-          <div className="mb-2 text-sm text-gray-500">Original URL:</div>
-          <div className="block mb-4 text-sm">
-            <a href="https://arxiv.org/abs/1706.03762" className="text-blue-600 hover:text-blue-800">https://arxiv.org/abs/1706.03762</a>
-          </div>
+          <div className="bg-base-200 p-4 rounded-lg">
+            <div className="text-sm opacity-75 mb-2">Original URL:</div>
+            <a href="https://arxiv.org/abs/1706.03762" className="link link-primary block mb-4">
+              https://arxiv.org/abs/1706.03762
+            </a>
 
-          <div className="mb-2 text-sm text-gray-500">Change to:</div>
-          <div className="block mb-4 text-sm">
-            <a href="https://arxiv-txt.org/abs/1706.03762" className="text-blue-600 hover:text-blue-800">https://arxiv-txt.org/abs/1706.03762</a>
+            <div className="text-sm opacity-75 mb-2">Change to:</div>
+            <a href="https://arxiv-txt.org/abs/1706.03762" className="link link-primary block mb-4">
+              https://arxiv-txt.org/abs/1706.03762
+            </a>
           </div>
         </div>
       </div>
 
-      <div className="mt-10 w-full">
-        <h2 className="text-xl font-semibold mb-4">Try Some Examples</h2>
-        <div className="grid grid-cols-3 gap-2">
+      <div className="w-full max-w-2xl mt-10">
+        <h2 className="text-2xl font-bold mb-6">Try Some Examples</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a
             href="/abs/1706.03762"
-            className="block bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-6 py-3 transition-colors"
+            className="btn btn-primary"
           >
             arxiv-txt.org/
             <br />
@@ -62,7 +64,7 @@ curl -s https://arxiv-txt.org/raw/abs/1706.03762 | llm -s "ELI5"
           </a>
           <a
             href="/abs/2402.17764"
-            className="block bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-6 py-3 transition-colors"
+            className="btn btn-primary"
           >
             arxiv-txt.org/
             <br />
@@ -70,7 +72,7 @@ curl -s https://arxiv-txt.org/raw/abs/1706.03762 | llm -s "ELI5"
           </a>
           <a
             href="/abs/2501.12948"
-            className="block bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-6 py-3 transition-colors"
+            className="btn btn-primary"
           >
             arxiv-txt.org/
             <br />
@@ -79,64 +81,69 @@ curl -s https://arxiv-txt.org/raw/abs/1706.03762 | llm -s "ELI5"
         </div>
       </div>
 
-      <div className="bg-white p-8 rounded-lg shadow-md w-full mb-8 mt-16 border-t border-gray-100">
-        <h2 className="text-xl font-semibold mb-4">API Usage Guide</h2>
-        <div className="flex flex-col gap-4">
-          <p>
-            To fetch the raw text directly, use <code className="bg-gray-100 px-2 py-1 rounded">https://arxiv-txt.org/raw/</code>:
-            <br />
-            <br />
-            For example:
-            <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="text-blue-600 hover:text-blue-800">https://arxiv-txt.org/raw/abs/1706.03762</a>
-          </p>
-        </div>
-
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Python</h3>
-          <div className="bg-gray-50 p-4 rounded-lg text-left">
-            <Highlight theme={themes.github} code={pythonCode} language="python">
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={`${className} text-sm overflow-x-auto`} style={style}>
-                  {tokens.map((line, i) => (
-                    <div key={i} {...getLineProps({ line })}>
-                      {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({ token })} />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
-              )}
-            </Highlight>
+      <div className="card bg-base-100 w-full max-w-2xl shadow-xl my-16">
+        <div className="card-body">
+          <h2 className="card-title">API Usage Guide</h2>
+          <div className="space-y-4">
+            <p>
+              To fetch the raw text directly, use <code className="badge badge-ghost">https://arxiv-txt.org/raw/</code>:
+              <br />
+              <br />
+              For example:
+              <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="link link-primary block mt-2">
+                https://arxiv-txt.org/raw/abs/1706.03762
+              </a>
+            </p>
           </div>
-        </div>
 
-        <div>
-          <h3 className="text-lg font-medium mb-3">Command Line</h3>
-          <div className="bg-gray-50 p-4 rounded-lg text-left">
-            <Highlight theme={themes.github} code={bashCode} language="bash">
-              {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={`${className} text-sm overflow-x-auto`} style={style}>
-                  {tokens.map((line, i) => (
-                    <div key={i} {...getLineProps({ line })}>
-                      {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({ token })} />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
-              )}
-            </Highlight>
+          <div className="divider"></div>
+
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-3">Python</h3>
+            <div className="mockup-code relative overflow-hidden rounded-lg">
+              <Highlight theme={themes.gruvboxMaterialDark} code={pythonCode} language="python">
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                  <pre className={`${className} p-6`} style={{...style, lineHeight: 1.5}}>
+                    {tokens.map((line, i) => (
+                      <div key={i} {...getLineProps({ line })} className="pl-4">
+                        {line.map((token, key) => (
+                          <span key={key} {...getTokenProps({ token })} />
+                        ))}
+                      </div>
+                    ))}
+                  </pre>
+                )}
+              </Highlight>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold mb-3">Command Line</h3>
+            <div className="mockup-code relative overflow-hidden rounded-lg">
+              <Highlight theme={themes.gruvboxMaterialDark} code={bashCode} language="python">
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                  <pre className={`${className} p-6`} style={{...style, lineHeight: 1.5}}>
+                    {tokens.map((line, i) => (
+                      <div key={i} {...getLineProps({ line })}>
+                        {line.map((token, key) => (
+                          <span key={key} {...getTokenProps({ token })} />
+                        ))}
+                      </div>
+                    ))}
+                  </pre>
+                )}
+              </Highlight>
+            </div>
           </div>
         </div>
       </div>
 
-
-      <footer className="mt-16 text-sm text-gray-600">
+      <footer className="text-sm opacity-75">
         <p className="flex items-center justify-center gap-1">
-          Made with <span className="text-red-500">❤</span> by{" "}
+          Made with <span className="text-error">❤</span> by{" "}
           <a
             href="https://twitter.com/jerpint"
-            className="text-blue-600 hover:text-blue-800"
+            className="link link-primary"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -146,7 +153,7 @@ curl -s https://arxiv-txt.org/raw/abs/1706.03762 | llm -s "ELI5"
         <div className="mt-2 flex items-center justify-center gap-4">
           <a
             href="https://github.com/jerpint/arxiv-txt"
-            className="text-blue-600 hover:text-blue-800"
+            className="link link-primary"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -155,7 +162,7 @@ curl -s https://arxiv-txt.org/raw/abs/1706.03762 | llm -s "ELI5"
           <span>•</span>
           <a
             href="https://jerpint.io"
-            className="text-blue-600 hover:text-blue-800"
+            className="link link-primary"
             target="_blank"
             rel="noopener noreferrer"
           >

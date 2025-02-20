@@ -3,25 +3,70 @@
 @tailwind utilities;
 
 :root {
+  /* These will be overridden by daisyUI themes */
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 248, 250, 252;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  min-height: 100vh;
+  /* Let daisyUI handle the colors through themes */
 }
 
+/* Add some fun animations and transitions */
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold;
   }
 
   code {
-    @apply font-mono;
+    @apply font-mono py-1 px-2 rounded transition-all duration-300;
   }
 
   pre {
     @apply font-mono;
   }
+
+  a {
+    @apply transition-all duration-300;
+  }
+}
+
+@layer components {
+  .glow-effect {
+    @apply transition-all duration-300;
+    filter: drop-shadow(0 0 8px theme('colors.primary'));
+  }
+
+  .glow-effect:hover {
+    filter: drop-shadow(0 0 12px theme('colors.secondary'));
+  }
+
+  .bounce-hover {
+    @apply transition-transform duration-200;
+  }
+
+  .bounce-hover:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Custom theme tweaks for light/dark mode */
+[data-theme="cyberpunk"] {
+  background-image: linear-gradient(to bottom right,
+    hsl(var(--b1)),
+    hsl(var(--b2))
+  );
+}
+
+[data-theme="synthwave"] {
+  background-image: linear-gradient(to bottom right,
+    hsl(var(--b1)),
+    hsl(var(--p))
+  );
+}
+
+/* Add to your globals.css */
+.mockup-code::before {
+  display: none !important;
 }
