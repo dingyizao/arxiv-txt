@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </header>
         <main className="container mx-auto px-4 py-8 max-w-3xl">
           {children}
+          <Analytics />
         </main>
       </body>
     </html>
