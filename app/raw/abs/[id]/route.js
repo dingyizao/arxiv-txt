@@ -34,7 +34,7 @@ export async function GET(request, { params }) {
     const authors = extractAllData(xmlData, /<author><name>(.*?)<\/name><\/author>/g);
     const categories = extractAllData(xmlData, /<category term="(.*?)"/g);
     const published = extractData(xmlData, /<published>(.*?)<\/published>/s);
-    const updated = extractData(xmlData, /<updated>(.*?)<\/updated>/s);
+    // const updated = extractData(xmlData, /<updated>(.*?)<\/updated>/s);
     const arxivId = extractId(xmlData);
     const doi = extractData(xmlData, /<arxiv:doi>(.*?)<\/arxiv:doi>/s) ||
                 extractData(xmlData, /<arxiv\\:doi>(.*?)<\/arxiv\\:doi>/s);
@@ -43,7 +43,7 @@ export async function GET(request, { params }) {
 
     // Format dates if present
     const publishedDate = formatDate(published);
-    const updatedDate = formatDate(updated);
+    // const updatedDate = formatDate(updated);
 
     // Generate plain text format
     const plainTextContent = `# ${title}
