@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'arXiv-txt.org - LLM-friendly arXiv papers',
-  description: 'Get arXiv papers in a format optimized for large language models instantly',
+  description: 'Convert arXiv papers into LLM-friendly formats',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
