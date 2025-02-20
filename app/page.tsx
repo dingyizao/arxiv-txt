@@ -44,13 +44,13 @@ llm -s "ELI5"
             </a>
 
             <div className="text-sm opacity-75 mb-2">Change to:</div>
-            <a href="https://arxiv-txt.org/abs/1706.03762" className="link link-primary block mb-4">
+            <a href="/abs/1706.03762" className="link link-primary block mb-4">
               https://arxiv-txt.org/abs/1706.03762
             </a>
           </div>
             <p> To fetch the raw text directly, use <code className="badge badge-ghost">https://arxiv-txt.org/raw/</code>:</p>
             <p>
-              <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="link link-primary block mb-4">
+              <a href="/raw/abs/1706.03762" className="link link-primary block mb-4">
                 https://arxiv-txt.org/raw/abs/1706.03762
               </a>
             </p>
