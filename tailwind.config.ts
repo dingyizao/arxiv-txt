@@ -18,6 +18,8 @@ const config: Config = {
   plugins: [daisyui],
   daisyui: {
     themes: ["retro", "dark"],
+    // themes: ["retro", "dark"],
+    // themes: ["lemonade", "dark"],
   },
 }
 
