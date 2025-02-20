@@ -1,4 +1,25 @@
+import { Highlight, themes } from "prism-react-renderer";
+
 export default function Home() {
+  const pythonCode = `
+import requests
+
+arxiv_url = "https://arxiv.org/abs/1706.03762"
+summary: str = requests.get(
+  arxiv_url.replace("arxiv.org", "arxiv-txt.org/raw/")
+).text
+print(summary)
+
+# Pass this to your favorite agent`;
+
+  const bashCode = `# Download with curl
+curl -o paper.txt https://arxiv-txt.org/raw/abs/1706.03762
+
+# Use with @simonw LLM library
+curl -s https://arxiv-txt.org/raw/abs/1706.03762 | llm -s "ELI5"
+`;
+
+
   return (
     <div className="flex flex-col items-center text-center max-w-2xl mx-auto py-12">
       <h1 className="text-3xl font-bold mb-8">
@@ -57,6 +78,58 @@ export default function Home() {
           </a>
         </div>
       </div>
+
+      <div className="bg-white p-8 rounded-lg shadow-md w-full mb-8 mt-16 border-t border-gray-100">
+        <h2 className="text-xl font-semibold mb-4">API Usage Guide</h2>
+        <div className="flex flex-col gap-4">
+          <p>
+            To fetch the raw text directly, use <code className="bg-gray-100 px-2 py-1 rounded">https://arxiv-txt.org/raw/</code>:
+            <br />
+            <br />
+            For example:
+            <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="text-blue-600 hover:text-blue-800">https://arxiv-txt.org/raw/abs/1706.03762</a>
+          </p>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3">Python</h3>
+          <div className="bg-gray-50 p-4 rounded-lg text-left">
+            <Highlight theme={themes.github} code={pythonCode} language="python">
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={`${className} text-sm overflow-x-auto`} style={style}>
+                  {tokens.map((line, i) => (
+                    <div key={i} {...getLineProps({ line })}>
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token })} />
+                      ))}
+                    </div>
+                  ))}
+                </pre>
+              )}
+            </Highlight>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-3">Command Line</h3>
+          <div className="bg-gray-50 p-4 rounded-lg text-left">
+            <Highlight theme={themes.github} code={bashCode} language="bash">
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={`${className} text-sm overflow-x-auto`} style={style}>
+                  {tokens.map((line, i) => (
+                    <div key={i} {...getLineProps({ line })}>
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token })} />
+                      ))}
+                    </div>
+                  ))}
+                </pre>
+              )}
+            </Highlight>
+          </div>
+        </div>
+      </div>
+
 
       <footer className="mt-16 text-sm text-gray-600">
         <p className="flex items-center justify-center gap-1">
