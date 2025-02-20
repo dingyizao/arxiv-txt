@@ -114,7 +114,7 @@ function formatDate(dateString) {
       month: 'long',
       day: 'numeric'
     });
-  } catch (e) {
+  } catch {
     return dateString;
   }
 }
