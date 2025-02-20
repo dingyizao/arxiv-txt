@@ -96,8 +96,38 @@ export default function PaperPage({ params }) {
       <Toaster position="top-right" />
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
-          <div className="flex justify-between items-center gap-4">
-            <h1 className="card-title text-2xl">{paper.title}</h1>
+          <div className="flex justify-between items-start gap-4">
+            <div className="flex flex-col gap-4">
+              <h1 className="card-title text-2xl">{paper.title}</h1>
+              <details className="dropdown">
+                <summary className="btn btn-ghost btn-sm">
+                  View paper
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </summary>
+                <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                  <li>
+                    <a
+                      href={`https://arxiv.org/abs/${paper.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View on arXiv
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={`https://arxiv.org/pdf/${paper.id}.pdf`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Download PDF
+                    </a>
+                  </li>
+                </ul>
+              </details>
+            </div>
             <div className="flex gap-2">
               <a
                 href={`/raw/abs/${id}`}
@@ -123,49 +153,24 @@ export default function PaperPage({ params }) {
           </div>
 
           <Metadata paper={paper} />
+          {paper.doi && (
+            <div className="text-sm text-base-content/70">
+              DOI: <a
+                href={`https://doi.org/${paper.doi}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link link-primary"
+              >
+                {paper.doi}
+              </a>
+            </div>
+          )}
 
           <div className="divider"></div>
 
           <section>
             <h2 className="text-xl font-semibold mb-4">Abstract</h2>
             <p className="text-base-content/80 leading-relaxed">{paper.abstract}</p>
-          </section>
-
-          <div className="divider"></div>
-
-          <section>
-            <h2 className="text-xl font-semibold mb-4">Links</h2>
-            <ul className="menu bg-base-200 w-fit rounded-box">
-              <li>
-                <a
-                  href={`https://arxiv.org/abs/${paper.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View on arXiv
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`https://arxiv.org/pdf/${paper.id}.pdf`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Download PDF
-                </a>
-              </li>
-              {paper.doi && (
-                <li>
-                  <a
-                    href={`https://doi.org/${paper.doi}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    DOI: {paper.doi}
-                  </a>
-                </li>
-              )}
-            </ul>
           </section>
 
           <div className="divider"></div>
