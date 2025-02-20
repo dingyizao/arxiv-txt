@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center text-center max-w-2xl mx-auto py-12">
       <h1 className="text-3xl font-bold mb-8">
-        Welcome to arXiv-txt.org
+        arXiv-txt.org
       </h1>
       <p className="mb-6 text-gray-700">
         Make arXiv papers easily available in LLM-friendly formats.
@@ -17,14 +17,14 @@ export default function Home() {
 
         <div className="bg-gray-50 p-4 rounded-lg text-left">
           <div className="mb-2 text-sm text-gray-500">Original URL:</div>
-          <code className="block mb-4 text-sm">
-            https://arxiv.org/abs/1706.03762
-          </code>
+          <div className="block mb-4 text-sm">
+            <a href="https://arxiv.org/abs/1706.03762" className="text-blue-600 hover:text-blue-800">https://arxiv.org/abs/1706.03762</a>
+          </div>
 
-          <div className="mb-2 text-sm text-gray-500">Changed to:</div>
-          <code className="block text-sm font-semibold">
-            https://arxiv-txt.org/abs/1706.03762
-          </code>
+          <div className="mb-2 text-sm text-gray-500">Change to:</div>
+          <div className="block mb-4 text-sm">
+            <a href="https://arxiv-txt.org/abs/1706.03762" className="text-blue-600 hover:text-blue-800">https://arxiv-txt.org/abs/1706.03762</a>
+          </div>
         </div>
       </div>
 
@@ -57,6 +57,39 @@ export default function Home() {
           </a>
         </div>
       </div>
+
+      <footer className="mt-16 text-sm text-gray-600">
+        <p className="flex items-center justify-center gap-1">
+          Made with <span className="text-red-500">❤</span> by{" "}
+          <a
+            href="https://twitter.com/jerpint"
+            className="text-blue-600 hover:text-blue-800"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @jerpint
+          </a>
+        </p>
+        <div className="mt-2 flex items-center justify-center gap-4">
+          <a
+            href="https://github.com/jerpint/arxiv-txt"
+            className="text-blue-600 hover:text-blue-800"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          <span>•</span>
+          <a
+            href="https://jerpint.io"
+            className="text-blue-600 hover:text-blue-800"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Blog
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
