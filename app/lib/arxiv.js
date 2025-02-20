@@ -127,16 +127,19 @@ export const parseArxivResponse = (xmlData) => {
  * @returns {string} - Plain text representation
  */
 export const generatePlainTextFormat = (paper) => {
-  return `TITLE: ${paper.title}
-AUTHORS: ${paper.authors.join(', ')}
-CATEGORIES: ${paper.categories.join(', ')}
-PUBLISHED: ${paper.publishedDate}
-${paper.updatedDate !== paper.publishedDate ? `UPDATED: ${paper.updatedDate}` : ''}
-${paper.journalRef ? `JOURNAL-REF: ${paper.journalRef}` : ''}
-${paper.doi ? `DOI: ${paper.doi}` : ''}
-ARXIV-ID: ${paper.id}
+  return `# ${paper.title}
 
-ABSTRACT:
+## Authors
+${paper.authors.join(', ')}
+
+## Categories
+${paper.categories.join(', ')}
+
+## Publication Details
+- Published: ${paper.publishedDate}
+- arXiv ID: ${paper.id}
+
+## Abstract
 ${paper.abstract}
 `;
 };
