@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { XMLParser } from 'fast-xml-parser';
+import { getArxivApiUrl, normalizePaperId } from '@/app/lib/arxiv';
 
 export async function GET(request, { params }) {
   try {
@@ -12,8 +13,14 @@ export async function GET(request, { params }) {
       });
     }
 
-    // Use your existing API endpoint to get the data
-    const apiResponse = await fetch(`${new URL(request.url).origin}/api/arxiv/${id}`);
+    const normalizedId = normalizePaperId(id);
+    const arxivUrl = getArxivApiUrl(normalizedId);
+    const apiResponse = await fetch(arxivUrl, {
+      headers: {
+        'Accept': 'application/xml',
+        'User-Agent': 'arXiv-txt.org (https://arxiv-txt.org; mailto:contact@arxiv-txt.org)'
+      },
+    });
 
     if (!apiResponse.ok) {
       return new NextResponse(
