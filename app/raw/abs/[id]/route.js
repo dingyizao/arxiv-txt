@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import { XMLParser } from 'fast-xml-parser';
+import { getArxivApiUrl, normalizePaperId } from '@/app/lib/arxiv';
 
 export async function GET(request, { params }) {
   try {
@@ -11,8 +13,14 @@ export async function GET(request, { params }) {
       });
     }
 
-    // Use your existing API endpoint to get the data
-    const apiResponse = await fetch(`${new URL(request.url).origin}/api/arxiv/${id}`);
+    const normalizedId = normalizePaperId(id);
+    const arxivUrl = getArxivApiUrl(normalizedId);
+    const apiResponse = await fetch(arxivUrl, {
+      headers: {
+        'Accept': 'application/xml',
+        'User-Agent': 'arXiv-txt.org (https://arxiv-txt.org; mailto:contact@arxiv-txt.org)'
+      },
+    });
 
     if (!apiResponse.ok) {
       return new NextResponse(
@@ -27,23 +35,29 @@ export async function GET(request, { params }) {
     // Get the XML data
     const xmlData = await apiResponse.text();
 
-    // Simple regex-based extraction of key information
-    // These patterns match the expected arXiv API structure
-    const title = extractData(xmlData, /<title>(.*?)<\/title>/s);
-    const abstract = extractData(xmlData, /<summary>(.*?)<\/summary>/s);
-    const authors = extractAllData(xmlData, /<author><name>(.*?)<\/name><\/author>/g);
-    const categories = extractAllData(xmlData, /<category term="(.*?)"/g);
-    const published = extractData(xmlData, /<published>(.*?)<\/published>/s);
-    // const updated = extractData(xmlData, /<updated>(.*?)<\/updated>/s);
-    const arxivId = extractId(xmlData);
-    const doi = extractData(xmlData, /<arxiv:doi>(.*?)<\/arxiv:doi>/s) ||
-                extractData(xmlData, /<arxiv\\:doi>(.*?)<\/arxiv\\:doi>/s);
-    const journalRef = extractData(xmlData, /<arxiv:journal_ref>(.*?)<\/arxiv:journal_ref>/s) ||
-                        extractData(xmlData, /<arxiv\\:journal_ref>(.*?)<\/arxiv\\:journal_ref>/s);
+    const parser = new XMLParser({
+      ignoreAttributes: false,
+      attributeNamePrefix: '@_'
+    });
+    const result = parser.parse(xmlData);
+    const entry = result.feed.entry;
+
+    // Extract data more reliably
+    const title = entry.title;
+    const abstract = entry.summary;
+    const authors = Array.isArray(entry.author)
+      ? entry.author.map(a => a.name)
+      : [entry.author.name];
+    const categories = Array.isArray(entry.category)
+      ? entry.category.map(c => c['@_term'])
+      : [entry.category['@_term']];
+    const published = entry.published;
+    const arxivId = entry.id.split('/').pop();
+    const doi = entry['arxiv:doi'];
+    const journalRef = entry['arxiv:journal_ref'];
 
     // Format dates if present
     const publishedDate = formatDate(published);
-    // const updatedDate = formatDate(updated);
 
     // Generate plain text format
     const plainTextContent = `# ${title}
@@ -82,27 +96,6 @@ ${abstract}
       }
     );
   }
-}
-
-// Helper functions
-function extractData(text, regex) {
-  const match = text.match(regex);
-  return match ? match[1].trim() : '';
-}
-
-function extractAllData(text, regex) {
-  const results = [];
-  let match;
-  while ((match = regex.exec(text)) !== null) {
-    results.push(match[1].trim());
-  }
-  return results;
-}
-
-function extractId(text) {
-  // Extract ID from the pattern in arXiv responses
-  const idMatch = text.match(/<id>https?:\/\/arxiv\.org\/abs\/(.*?)<\/id>/);
-  return idMatch ? idMatch[1] : '';
 }
 
 function formatDate(dateString) {
