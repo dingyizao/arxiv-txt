@@ -175,47 +175,56 @@ export async function fetchArxivHtml(paperId) {
 }
 
 export function convertHtmlToText(html) {
+  // First, extract all math nodes and their LaTeX content
+  const mathRegex = /<math[^>]*>([\s\S]*?)<\/math>/g;
+  const latexMap = new Map();
+
+  html = html.replace(mathRegex, (match, content) => {
+    // Extract LaTeX annotation
+    const texMatch = content.match(/<annotation encoding="application\/x-tex">([\s\S]*?)<\/annotation>/);
+    if (texMatch) {
+      const isDisplay = match.includes('display="block"');
+      const tex = texMatch[1].trim();
+      const placeholder = `__MATH_${latexMap.size}__`;
+      latexMap.set(placeholder, isDisplay ? `\n\n$$${tex}$$\n\n` : `$${tex}$`);
+      return placeholder;
+    }
+    // Fallback to alttext
+    const altMatch = match.match(/alttext="([^"]*)"/);
+    if (altMatch) {
+      const placeholder = `__MATH_${latexMap.size}__`;
+      latexMap.set(placeholder, `$${altMatch[1]}$`);
+      return placeholder;
+    }
+    return match;
+  });
+
   const options = {
+    wordwrap: false,
+    preserveNewlines: true,
+    singleNewLineParagraphs: true,
     selectors: [
-      {
-        selector: 'h1',
-        format: 'block',
-        transform: (content) => `# ${content}\n\n`
-      },
-      {
-        selector: 'h2',
-        format: 'block',
-        transform: (content) => `## ${content}\n\n`
-      },
-      {
-        selector: 'h3',
-        format: 'block',
-        transform: (content) => `### ${content}\n\n`
-      },
       {
         selector: 'p',
         format: 'block',
         transform: (content) => `${content}\n\n`
-      },
-      {
-        selector: 'math',
-        format: 'inline',
-        transform: (content, node) => {
-          const mathText = node.getAttribute('alttext') || content;
-          return `$${mathText}$`;
-        }
       }
-    ],
-    wordwrap: false,
-    preserveNewlines: true,
-    singleNewLineParagraphs: true
+    ]
   };
 
   try {
-    const text = htmlToText(html, options);
+    let text = htmlToText(html, options);
+
+    // Replace math placeholders with LaTeX
+    latexMap.forEach((latex, placeholder) => {
+      text = text.replace(placeholder, latex);
+    });
+
     return text
       .replace(/\n{3,}/g, '\n\n')
       .replace(/\s+$/gm, '')
+      .replace(/([^.])\n\n([^\n])/g, '$1 $2')
+      .replace(/\s*\[\s*(\d+(?:,\s*\d+)*)\s*\]/g, ' [$1]')
       .trim();
   } catch (error) {
     throw new ArxivError(`Error converting HTML to text: ${error.message}`, 500);
