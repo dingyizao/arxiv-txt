@@ -1,6 +1,7 @@
 /**
  * Helper functions for working with the arXiv API
  */
+import { htmlToText } from 'html-to-text';
 
 // arXiv API base URL
 const ARXIV_API_BASE = 'http://export.arxiv.org/api/query';
@@ -143,3 +144,80 @@ ${paper.categories.join(', ')}
 ${paper.abstract}
 `;
 };
+
+
+export class ArxivError extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.name = 'ArxivError';
+    this.statusCode = statusCode;
+  }
+}
+
+export async function fetchArxivHtml(paperId) {
+  try {
+    const response = await fetch(`https://arxiv.org/html/${paperId}`);
+
+    if (!response.ok) {
+      throw new ArxivError(
+        `Failed to fetch arXiv paper ${paperId}`,
+        response.status
+      );
+    }
+
+    return await response.text();
+  } catch (error) {
+    if (error instanceof ArxivError) {
+      throw error;
+    }
+    throw new ArxivError(`Error fetching arXiv paper: ${error.message}`, 500);
+  }
+}
+
+export function convertHtmlToText(html) {
+  const options = {
+    selectors: [
+      {
+        selector: 'h1',
+        format: 'block',
+        transform: (content) => `# ${content}\n\n`
+      },
+      {
+        selector: 'h2',
+        format: 'block',
+        transform: (content) => `## ${content}\n\n`
+      },
+      {
+        selector: 'h3',
+        format: 'block',
+        transform: (content) => `### ${content}\n\n`
+      },
+      {
+        selector: 'p',
+        format: 'block',
+        transform: (content) => `${content}\n\n`
+      },
+      {
+        selector: 'math',
+        format: 'inline',
+        transform: (content, node) => {
+          const mathText = node.getAttribute('alttext') || content;
+          return `$${mathText}$`;
+        }
+      }
+    ],
+    wordwrap: false,
+    preserveNewlines: true,
+    singleNewLineParagraphs: true
+  };
+
+  try {
+    const text = htmlToText(html, options);
+    return text
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/\s+$/gm, '')
+      .trim();
+  } catch (error) {
+    throw new ArxivError(`Error converting HTML to text: ${error.message}`, 500);
+  }
+}
