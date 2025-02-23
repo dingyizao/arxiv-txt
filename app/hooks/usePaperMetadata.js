@@ -31,8 +31,11 @@ export function usePaperMetadata(id) {
           authors: sections[1].replace('## Authors\n', '').split(', '),
           categories: sections[2].replace('## Categories\n', '').split(', '),
           abstract: sections[sections.length - 1].replace('## Abstract\n', ''),
+          publishedDate: sections[3].replace('## Publication Details\n', '').split('\n')[0].replace('- Published: ', ''),
           id: id
         };
+
+        console.log('Paper data:', paperData);
 
         // Extract DOI if present
         const doiMatch = content.match(/DOI: (.*)/);

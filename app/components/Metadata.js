@@ -30,7 +30,7 @@ export default function Metadata({ paper }) {
             {paper.updatedDate !== paper.publishedDate && (
               <>
                 <br />
-                <span className="font-medium">Last Updated:</span> {paper.updatedDate}
+                {/* <span className="font-medium">Last Updated:</span> {paper.updatedDate} */}
               </>
             )}
           </p>
