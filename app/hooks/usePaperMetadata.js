@@ -4,16 +4,13 @@ export function usePaperMetadata(id) {
   const [paper, setPaper] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [plainTextContent, setPlainTextContent] = useState('');
+  const [plainTextMetadata, setPlainTextMetadata] = useState('');
 
   useEffect(() => {
-    console.log('0. Starting fetch for ID:', id);
 
     async function fetchPaper() {
       setLoading(true);
       setError(null);
-
-      console.log('1. Starting fetch for ID:', id);
 
 
       try {
@@ -26,7 +23,7 @@ export function usePaperMetadata(id) {
         const content = await response.text();
 
         console.log('Fetched content:', content);
-        setPlainTextContent(content);
+        setPlainTextMetadata(content);
         // Parse the plain text content to extract structured data
         const sections = content.split('\n\n');
         const paperData = {
@@ -57,5 +54,5 @@ export function usePaperMetadata(id) {
     }
   }, [id]);
 
-  return { paper, loading, error, plainTextContent };
+  return { paper, loading, error, plainTextMetadata };
 }

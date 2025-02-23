@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { use } from 'react';
 import Metadata from '@/app/components/Metadata';
 import LoadingState from '@/app/components/LoadingState';
@@ -11,7 +10,7 @@ import { usePaperMetadata } from '@/app/hooks/usePaperMetadata';
 export default function PaperPage({ params }) {
   const unwrappedParams = use(params);
   const { id } = unwrappedParams;
-  const { paper, loading, error, plainTextContent } = usePaperMetadata(id);
+  const { paper, loading, error, plainTextMetadata } = usePaperMetadata(id);
 
 
   if (loading) {
@@ -39,7 +38,7 @@ export default function PaperPage({ params }) {
   // Move the function inside the component to access plainTextContent
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(plainTextContent);
+      await navigator.clipboard.writeText(plainTextMetadata);
       toast.success('Copied to clipboard!', {
         duration: 2000,
         style: {
@@ -170,7 +169,7 @@ export default function PaperPage({ params }) {
               </div>
             </div>
             <pre className="bg-base-200 p-4 rounded-box overflow-auto text-sm font-mono whitespace-pre-wrap">
-              {plainTextContent}
+              {plainTextMetadata}
             </pre>
           </section>
         </div>
