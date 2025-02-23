@@ -5,20 +5,21 @@ export default function Home() {
   const pythonCode = `import requests
 
 arxiv_url = "https://arxiv.org/abs/1706.03762"
-summary: str = requests.get(
-  arxiv_url.replace("arxiv.org", "arxiv-txt.org/raw/")
-).text
+arxiv_txt_url = arxiv_url.replace("arxiv.org", "arxiv-txt.org/raw/")
+summary: str = requests.get(arxiv_txt_url).text
 print(summary)
 
 # Pass this to your favorite agent`;
 
-  const bashCode = `# Download with curl
+  const bashCode = `# Save the raw text to a file
 curl -o paper.txt https://arxiv-txt.org/raw/abs/1706.03762
 
-# Use direcly in CLI
-# Install the 'llm' library first: https://github.com/simonw/llm
+# or pipe directly to CLI apps:
+# This example uses the 'llm' library
+# https://github.com/simonw/llm
+
 curl -L https://arxiv-txt.org/raw/abs/1706.03762 | \\
-llm -s "ELI5"
+llm -s "Explain this paper like I'm 5"
 `;
 
 
@@ -113,9 +114,13 @@ llm -s "ELI5"
               To fetch the raw text directly, use <code className="badge badge-ghost">https://arxiv-txt.org/raw/</code>:
               <br />
               <br />
-              For example:
+              For example, fetch paper metadata:
               <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="link link-primary block mt-2">
                 https://arxiv-txt.org/raw/abs/1706.03762
+              </a>
+              Or fetch full paper content:
+              <a href="https://arxiv-txt.org/raw/pdf/1706.03762" className="link link-primary block mt-2">
+                https://arxiv-txt.org/raw/pdf/1706.03762
               </a>
             </p>
           </div>
@@ -123,11 +128,11 @@ llm -s "ELI5"
           <div className="divider"></div>
 
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-3">Python</h3>
-            <div className="mockup-code relative overflow-hidden rounded-lg">
+            <h3 id="python" className="text-xl font-semibold mb-3">Python</h3>
+            <div className="mockup-code relative overflow-x-auto rounded-lg">
               <Highlight theme={themes.gruvboxMaterialDark} code={pythonCode} language="python">
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                  <pre className={`${className} p-6`} style={{...style, lineHeight: 1.5}}>
+                  <pre className={`${className} p-6 whitespace-pre`} style={{...style, lineHeight: 1.5}}>
                     {tokens.map((line, i) => (
                       <div key={i} {...getLineProps({ line })} className="pl-4">
                         {line.map((token, key) => (
@@ -142,11 +147,11 @@ llm -s "ELI5"
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-3">Command Line</h3>
-            <div className="mockup-code relative overflow-hidden rounded-lg">
+            <h3 id="cli" className="text-xl font-semibold mb-3">Command Line</h3>
+            <div className="mockup-code relative overflow-x-auto rounded-lg">
               <Highlight theme={themes.gruvboxMaterialDark} code={bashCode} language="python">
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                  <pre className={`${className} p-6`} style={{...style, lineHeight: 1.5}}>
+                  <pre className={`${className} p-6 whitespace-pre`} style={{...style, lineHeight: 1.5}}>
                     {tokens.map((line, i) => (
                       <div key={i} {...getLineProps({ line })}>
                         {line.map((token, key) => (
