@@ -64,7 +64,14 @@ export default function PaperPage({ params }) {
         <div className="card-body">
           <div className="flex justify-between items-start gap-4">
             <div className="flex flex-col gap-4">
-              <h1 className="card-title text-2xl">{paper.title}</h1>
+              <h1 className="card-title text-2xl">Paper Content</h1>
+              <div className="text-base-content/70">
+                <p>{paper.title} ({paper.id})</p>
+                <p className="text-sm mt-1">
+                  Note: This text is automatically extracted and may contain errors.
+                  Please <a href="https://github.com/jerpint/arxiv-txt/issues" target="_blank" rel="noopener noreferrer" className="link link-primary">report any issues</a> on GitHub.
+                </p>
+              </div>
               <details className="dropdown">
                 <summary className="btn btn-ghost btn-sm">
                   View paper
@@ -96,7 +103,7 @@ export default function PaperPage({ params }) {
             </div>
             <div className="flex gap-2">
               <a
-                href={`/raw/abs/${id}`}
+                href={`/raw/html/${id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-ghost btn-sm gap-2"
