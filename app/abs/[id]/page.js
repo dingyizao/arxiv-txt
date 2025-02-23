@@ -38,6 +38,7 @@ export default function AbstractPage({ params }) {
       <PaperView
         paper={paper}
         plainText={plainTextMetadata}
+        buttonText="Abstract"
         type="abs"
       />
       <Layout />
