@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function usePaperData(id) {
+export function usePaperMetadata(id) {
   const [paper, setPaper] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

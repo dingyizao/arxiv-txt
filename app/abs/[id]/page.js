@@ -6,12 +6,12 @@ import Metadata from '@/app/components/Metadata';
 import LoadingState from '@/app/components/LoadingState';
 import { Toaster, toast } from 'react-hot-toast';
 import Layout from '@/app/components/Layout';
-import { usePaperData } from '@/app/hooks/usePaperData';
+import { usePaperMetadata } from '@/app/hooks/usePaperMetadata';
 
 export default function PaperPage({ params }) {
   const unwrappedParams = use(params);
   const { id } = unwrappedParams;
-  const { paper, loading, error, plainTextContent } = usePaperData(id);
+  const { paper, loading, error, plainTextContent } = usePaperMetadata(id);
 
 
   if (loading) {
