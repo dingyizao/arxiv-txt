@@ -52,7 +52,7 @@ llm -s "Explain this paper like I'm 5"
             </a>
 
             <div className="text-sm opacity-75 mb-2">Change to either:</div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <div className="p-3 bg-base-300 rounded-lg">
                 <a href="/abs/1706.03762" className="link link-primary block">
                   https://arxiv-txt.org/abs/1706.03762
