@@ -34,9 +34,18 @@ export default function PaperView({ paper, plainText, buttonText, type }) {
           <div className="flex justify-between items-start gap-4">
             <div className="flex flex-col gap-4">
               <h1 className="card-title text-2xl">{paper.title}</h1>
+              <div className="flex gap-2 text-sm">
+                {/* <a href={`/raw/abs/${paper.id}`} className="link link-primary">raw/abs/</a>
+                <span>•</span>
+                <a href={`/raw/pdf/${paper.id}`} className="link link-primary">raw/pdf/</a>
+                <span>•</span> */}
+                <a href={`/pdf/${paper.id}`} className="link link-primary">arxiv-txt: pdf</a>
+                <span>|</span>
+                <a href={`/abs/${paper.id}`} className="link link-primary">arxiv-txt: abs</a>
+              </div>
               <details className="dropdown">
                 <summary className="btn btn-ghost btn-sm">
-                  View paper
+                  View on arXiv
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m6 9 6 6 6-6"/>
                   </svg>
@@ -44,7 +53,7 @@ export default function PaperView({ paper, plainText, buttonText, type }) {
                 <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                   <li>
                     <a href={`https://arxiv.org/abs/${paper.id}`} target="_blank" rel="noopener noreferrer">
-                      View on arXiv
+                      Paper Page
                     </a>
                   </li>
                   <li>
