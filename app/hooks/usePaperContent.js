@@ -14,7 +14,7 @@ export function usePaperContent(id) {
 
 
       try {
-        const response = await fetch(`/raw/html/${id}`);
+        const response = await fetch(`/raw/pdf/${id}`);
 
         if (!response.ok) {
           throw new Error(`Failed to fetch paper: ${response.status} ${response.statusText}`);

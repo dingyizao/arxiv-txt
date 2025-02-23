@@ -2,13 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return [
-      {
-        source: '/pdf/:id',
-        destination: '/abs/:id',
-        permanent: true,
-      },
-    ];
+    return [];  // Explicitly return empty redirects
   },
 };
 
