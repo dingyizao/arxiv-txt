@@ -50,17 +50,25 @@ llm -s "ELI5"
               https://arxiv.org/abs/1706.03762
             </a>
 
-            <div className="text-sm opacity-75 mb-2">Change to:</div>
-            <a href="/abs/1706.03762" className="link link-primary block mb-4">
-              https://arxiv-txt.org/abs/1706.03762
-            </a>
+            <div className="text-sm opacity-75 mb-2">Change to either:</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-3 bg-base-300 rounded-lg">
+                <a href="/abs/1706.03762" className="link link-primary block">
+                  https://arxiv-txt.org/abs/1706.03762
+                </a>
+                <span className="text-sm opacity-75">Gets paper metadata and abstract</span>
+              </div>
+
+              <div className="p-3 bg-base-300 rounded-lg">
+                <a href="/pdf/1706.03762" className="link link-primary block">
+                  https://arxiv-txt.org/pdf/1706.03762
+                </a>
+                <span className="text-sm opacity-75">Gets full paper content</span>
+              </div>
+            </div>
           </div>
-            <p> To fetch the raw text directly, use <code className="badge badge-ghost">https://arxiv-txt.org/raw/</code>:</p>
-            <p>
-              <a href="/raw/abs/1706.03762" className="link link-primary block mb-4">
-                https://arxiv-txt.org/raw/abs/1706.03762
-              </a>
-            </p>
+
+          <p className="mt-4">For raw text API access, see API usage guide below.</p>
         </div>
       </div>
 
