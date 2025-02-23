@@ -27,7 +27,12 @@ llm -s "ELI5"
         arXiv-txt.org
       </h1>
       <p className="text-lg opacity-90 mb-8">
-        Make arXiv papers easily available in LLM-friendly formats.
+        LLM-friendly arXiv papers | <a href="https://github.com/jerpint/arxiv-txt" className="link inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+          GitHub
+          <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
       </p>
 
       <div className="card bg-base-100 w-full max-w-2xl shadow-xl mb-8">
@@ -58,7 +63,7 @@ llm -s "ELI5"
         </div>
       </div>
 
-      <div className="w-full max-w-2xl mt-10">
+      {/* <div className="w-full max-w-2xl mt-10">
         <h2 className="text-2xl font-bold mb-6">Try Some Examples</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a
@@ -86,11 +91,14 @@ llm -s "ELI5"
             abs/2501.12948
           </a>
         </div>
-      </div>
+      </div> */}
 
       <div className="card bg-base-100 w-full max-w-2xl shadow-xl my-16">
+        <h1 className="text-2xl font-bold text-center">
+          API Usage Guide
+        </h1>
         <div className="card-body">
-          <h2 className="card-title">API Usage Guide</h2>
+          {/* <h2 className="card-title">API Usage Guide</h2> */}
           <div className="space-y-4">
             <p>
               To fetch the raw text directly, use <code className="badge badge-ghost">https://arxiv-txt.org/raw/</code>:
