@@ -15,7 +15,8 @@ print(summary)
   const bashCode = `# Download with curl
 curl -o paper.txt https://arxiv-txt.org/raw/abs/1706.03762
 
-# Use with @simonw LLM library
+# Use direcly in CLI
+# Install the 'llm' library first: https://github.com/simonw/llm
 curl -L https://arxiv-txt.org/raw/abs/1706.03762 | \\
 llm -s "ELI5"
 `;
