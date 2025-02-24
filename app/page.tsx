@@ -129,6 +129,8 @@ llm -s "Explain this paper like I'm 5"
 
           <div className="mb-6">
             <h3 id="python" className="text-xl font-semibold mb-3">Python</h3>
+            <p> Checkout this example <a href="https://github.com/jerpint/arxiv-txt/blob/main/examples/python/lit_review.ipynb" target="_blank" rel="noopener noreferrer" className="link link-primary">Jupyter Notebook</a> or use the arxiv-txt API directly </p>
+            <br />
             <div className="mockup-code relative overflow-x-auto rounded-lg">
               <Highlight theme={themes.gruvboxMaterialDark} code={pythonCode} language="python">
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
