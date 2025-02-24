@@ -8,6 +8,10 @@ A simple tool that makes arXiv papers instantly available in LLM-friendly format
 2. Change the URL to: `https://arxiv-txt.org/abs/2502.10248`
 3. copy an LLM-optimized version
 
+## API Usage
+
+See example use-cases in the [/examples/]() directory.
+
 ## Development
 
 This project is built with Next.js and Tailwind CSS.
@@ -60,14 +64,6 @@ vercel
 - **API Proxy**: Next.js API routes handle CORS and rate limiting
 - **Caching**: Response caching via Next.js and HTTP headers
 - **Deployment**: Vercel with custom configuration
-
-## Future Enhancements
-
-- Content extraction from PDFs
-- Equation and figure detection and processing
-- Citation extraction and formatting
-- User preferences (dark mode, etc.)
-- Accessibility improvements
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
