@@ -2,7 +2,7 @@
 
 import { Toaster, toast } from 'react-hot-toast';
 
-export default function PaperView({ paper, plainText }) {
+export default function PaperView({ paper, plainText, paperContent }) {
   const copyToClipboard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -26,7 +26,6 @@ export default function PaperView({ paper, plainText }) {
   };
 
   const copyAllContent = () => {
-    const paperContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet.";
     const combinedText = `Summary:\n${plainText}\n\nPaper Content:\n${paperContent}`;
     copyToClipboard(combinedText);
   };
@@ -63,6 +62,10 @@ export default function PaperView({ paper, plainText }) {
 
           <div className="divider"></div>
 
+          <div className="text-sm border-l-4 border-base-content/20 pl-4 py-1 mb-4 text-base-content/80">
+            The PDF content is experimental. Please report any issues on <a href="https://github.com/jerpint/arxiv-txt/issues" className="underline">GitHub</a>.
+          </div>
+
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <div className="flex justify-between items-center mb-2">
@@ -86,29 +89,9 @@ export default function PaperView({ paper, plainText }) {
 
             <div className="flex-1">
               <div className="flex justify-between items-center mb-2">
-                <h3 className="text-lg font-medium">Paper Content</h3>
+                <h3 className="text-lg font-medium">PDF Content</h3>
                 <button
-                  onClick={() => {
-                    try {
-                      navigator.clipboard.writeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet.");
-                      toast.success('Copied to clipboard!', {
-                        duration: 2000,
-                        style: {
-                          background: '#4ade80',
-                          color: '#fff',
-                        },
-                        iconTheme: {
-                          primary: '#fff',
-                          secondary: '#10b981',
-                        }
-                      });
-                    } catch (err) {
-                      console.error('Failed to copy: ', err);
-                      toast.error('Failed to copy text', {
-                        duration: 2000,
-                      });
-                    }
-                  }}
+                  onClick={() => copyToClipboard(paperContent)}
                   className="btn btn-primary btn-sm gap-2"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,9 +100,9 @@ export default function PaperView({ paper, plainText }) {
                   Copy
                 </button>
               </div>
-              <div className="relative">
-                <pre className="bg-base-200 p-4 rounded-box overflow-auto text-sm font-mono whitespace-pre-wrap h-[400px]">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet.
+              <div className="relative h-[400px]">
+                <pre className="bg-base-200 p-4 rounded-box overflow-y-auto text-sm font-mono whitespace-pre-wrap absolute inset-0">
+                  {paperContent}
                 </pre>
               </div>
             </div>
