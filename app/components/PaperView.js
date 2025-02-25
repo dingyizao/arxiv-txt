@@ -81,7 +81,7 @@ export default function PaperView({ paper, plainText, paperContent }) {
                 </button>
               </div>
               <div className="relative">
-                <pre className="bg-base-200 p-4 rounded-box overflow-auto text-sm font-mono whitespace-pre-wrap h-[400px]">
+                <pre className="bg-base-200 p-4 rounded-box overflow-auto text-sm font-mono whitespace-pre-wrap h-[400px] break-all overflow-x-hidden">
                   {plainText}
                 </pre>
               </div>
@@ -101,7 +101,7 @@ export default function PaperView({ paper, plainText, paperContent }) {
                 </button>
               </div>
               <div className="relative h-[400px]">
-                <pre className="bg-base-200 p-4 rounded-box overflow-y-auto text-sm font-mono whitespace-pre-wrap absolute inset-0">
+                <pre className="bg-base-200 p-4 rounded-box overflow-y-auto text-sm font-mono whitespace-pre-wrap absolute inset-0 break-all overflow-x-hidden">
                   {paperContent}
                 </pre>
               </div>
