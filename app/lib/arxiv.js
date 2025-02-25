@@ -230,3 +230,31 @@ export function convertHtmlToText(html) {
     throw new ArxivError(`Error converting HTML to text: ${error.message}`, 500);
   }
 }
+
+/**
+ * Fetch BibTeX citation for an arXiv paper
+ * @param {string} paperId - The normalized arXiv paper ID
+ * @returns {Promise<string>} - BibTeX citation
+ */
+export const fetchArxivBibTeX = async (paperId) => {
+  try {
+    const normalizedId = normalizePaperId(paperId);
+    const bibtexUrl = `https://arxiv.org/bibtex/${normalizedId}`;
+
+    const response = await fetch(bibtexUrl);
+
+    if (!response.ok) {
+      throw new ArxivError(
+        `Failed to fetch BibTeX for paper ${paperId}`,
+        response.status
+      );
+    }
+
+    return await response.text();
+  } catch (error) {
+    if (error instanceof ArxivError) {
+      throw error;
+    }
+    throw new ArxivError(`Error fetching BibTeX: ${error.message}`, 500);
+  }
+};

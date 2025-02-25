@@ -59,6 +59,22 @@ export async function GET(request, { params }) {
     // Format dates if present
     const publishedDate = formatDate(published);
 
+    // Fetch BibTeX from arXiv
+    const bibtexUrl = `https://arxiv.org/bibtex/${normalizedId}`;
+    const bibtexResponse = await fetch(bibtexUrl, {
+      headers: {
+        'User-Agent': 'arXiv-txt.org (https://arxiv-txt.org; mailto:contact@arxiv-txt.org)'
+      },
+    });
+
+    let bibtexContent = '';
+    if (bibtexResponse.ok) {
+      bibtexContent = await bibtexResponse.text();
+    } else {
+      console.error(`Failed to fetch BibTeX: ${bibtexResponse.status} ${bibtexResponse.statusText}`);
+      // Continue even if BibTeX fetch fails
+    }
+
     // Generate plain text format
     const plainTextContent = `# ${title}
 
@@ -76,6 +92,10 @@ ${journalRef ? `- Journal Reference: ${journalRef}` : ''}
 
 ## Abstract
 ${abstract}
+
+${bibtexContent ? `## BibTeX
+${bibtexContent}
+` : ''}
 `;
 
     return new NextResponse(plainTextContent, {
