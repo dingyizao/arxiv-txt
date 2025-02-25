@@ -27,15 +27,13 @@ export function usePaperMetadata(id) {
         // Parse the plain text content to extract structured data
         const sections = content.split('\n\n');
         const paperData = {
-          title: sections[0].replace('# ', ''),
-          authors: sections[1].replace('## Authors\n', '').split(', '),
-          categories: sections[2].replace('## Categories\n', '').split(', '),
-          abstract: sections[sections.length - 1].replace('## Abstract\n', ''),
-          publishedDate: sections[3].replace('## Publication Details\n', '').split('\n')[0].replace('- Published: ', ''),
+          title: sections[0].replace('# Title\n', ''),
+          authors: sections[1].replace('# Authors\n', '').split(', '),
+          categories: sections[2].replace('# Categories\n', '').split(', '),
+          abstract: sections[sections.length - 1].replace('# Abstract\n', ''),
+          publishedDate: sections[3].replace('# Publication Details\n', '').split('\n')[0].replace('- Published: ', ''),
           id: id
         };
-
-        console.log('Paper data:', paperData);
 
         // Extract DOI if present
         const doiMatch = content.match(/DOI: (.*)/);

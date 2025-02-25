@@ -76,24 +76,25 @@ export async function GET(request, { params }) {
     }
 
     // Generate plain text format
-    const plainTextContent = `# ${title}
+    const plainTextContent = `# Title
+${title}
 
-## Authors
+# Authors
 ${authors.join(', ')}
 
-## Categories
+# Categories
 ${categories.join(', ')}
 
-## Publication Details
+# Publication Details
 - Published: ${publishedDate}
 - arXiv ID: ${arxivId}
 ${doi ? `- DOI: ${doi}` : ''}
 ${journalRef ? `- Journal Reference: ${journalRef}` : ''}
 
-## Abstract
+# Abstract
 ${abstract}
 
-${bibtexContent ? `## BibTeX
+${bibtexContent ? `# BibTeX
 ${bibtexContent}
 ` : ''}
 `;
