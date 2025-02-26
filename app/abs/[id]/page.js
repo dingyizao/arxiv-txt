@@ -17,12 +17,12 @@ export default function AbstractPage({ params }) {
     return <LoadingState />;
   }
 
-  if (paperError || paperContentError) {
+  if (paperError && paperContentError) {
     return (
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body text-center">
           <h2 className="card-title text-error justify-center">Error</h2>
-          <p>{paperError || paperContentError}</p>
+          <p>Failed to fetch paper information and content.</p>
           <p className="text-base-content/70">
             Please check that you have entered a valid arXiv paper ID.
           </p>
@@ -31,16 +31,17 @@ export default function AbstractPage({ params }) {
     );
   }
 
-  if (!paper) {
+  if (!paper && !paperError) {
     return null;
   }
 
   return (
     <>
       <PaperView
-        paper={paper}
-        plainText={ plainTextMetadata}
-        paperContent={paperContent}
+        paper={paper || { title: "Error fetching paper metadata", error: paperError }}
+        plainText={plainTextMetadata || ""}
+        paperContent={paperContent?.text || "Error fetching the paper content."}
+        paperContentError={paperContent?.error}
         buttonText="Abstract"
         type="abs"
       />
