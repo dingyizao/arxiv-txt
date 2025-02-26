@@ -41,35 +41,26 @@ llm -s "Explain this paper like I'm 5"
         <div className="card-body">
           <h2 className="card-title">How It Works</h2>
           <p className="mb-6">
-            Just change <code className="badge badge-ghost">arxiv.org</code> to
-            <code className="badge badge-ghost ml-2">arxiv-txt.org</code> in the URL.
+            Replace <code className="badge badge-ghost">arxiv.org</code> to
+            <code className="badge badge-ghost ml-2">arxiv-txt.org</code>
           </p>
 
           <div className="bg-base-200 p-4 rounded-lg">
-            <div className="text-sm opacity-75 mb-2">Original URL:</div>
-            <a href="https://arxiv.org/abs/1706.03762" className="link link-primary block mb-4">
-              https://arxiv.org/abs/1706.03762
-            </a>
+            {/* <div className="text-sm opacity-75 mb-2">Original URL:</div> */}
+            {/* <a href="https://arxiv.org/abs/1706.03762" className="link link-primary block mb-4"> */}
+              {/* https://arxiv.org/abs/1706.03762 */}
+            {/* </a> */}
 
-            <div className="text-sm opacity-75 mb-2">Change to either:</div>
-            <div className="grid grid-cols-1 gap-4">
-              <div className="p-3 bg-base-300 rounded-lg">
-                <a href="/abs/1706.03762" className="link link-primary block">
-                  https://arxiv-txt.org/abs/1706.03762
-                </a>
-                <span className="text-sm opacity-75">Gets paper metadata and abstract</span>
-              </div>
-
-              <div className="p-3 bg-base-300 rounded-lg">
-                <a href="/pdf/1706.03762" className="link link-primary block">
-                  https://arxiv-txt.org/pdf/1706.03762
-                </a>
-                <span className="text-sm opacity-75">Gets full paper content</span>
-              </div>
+            <div className="text-sm opacity-75 mb-2">Try it out:</div>
+            <div className="p-3 bg-base-300 rounded-lg">
+              <a href="/abs/1706.03762" className="link link-primary block">
+                https://arxiv-txt.org/abs/1706.03762
+              </a>
+              {/* <span className="text-sm opacity-75">Gets full paper content</span> */}
             </div>
           </div>
 
-          <p className="mt-4">For raw text API access, see API usage guide below.</p>
+          {/* <p className="mt-4">For raw text API access, see API usage guide below.</p> */}
         </div>
       </div>
 
@@ -111,18 +102,20 @@ llm -s "Explain this paper like I'm 5"
           {/* <h2 className="card-title">API Usage Guide</h2> */}
           <div className="space-y-4">
             <p>
-              To fetch the raw text directly, use <code className="badge badge-ghost">https://arxiv-txt.org/raw/</code>:
+              arXiv-txt is designed to be API-friendly <br />
+              Use <code className="badge badge-ghost">https://arxiv-txt.org/raw/abs/[id]</code> to get a markdown Summary.
               <br />
-              <br />
-              For example, fetch paper metadata:
-              <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="link link-primary block mt-2">
-                https://arxiv-txt.org/raw/abs/1706.03762
-              </a>
-              Or fetch full paper content:
-              <a href="https://arxiv-txt.org/raw/pdf/1706.03762" className="link link-primary block mt-2">
-                https://arxiv-txt.org/raw/pdf/1706.03762
-              </a>
+              Use <code className="badge badge-ghost">https://arxiv-txt.org/raw/pdf/[id]</code> to get the full paper content.
             </p>
+
+            <div className="mt-4">
+              <div className="text-sm opacity-75 mb-2">Try it out:</div>
+              <div className="p-3 bg-base-300 rounded-lg">
+                <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="link link-primary block">
+                  https://arxiv-txt.org/raw/abs/1706.03762
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="divider"></div>
