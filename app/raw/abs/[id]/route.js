@@ -82,6 +82,9 @@ ${title}
 # Authors
 ${authors.join(', ')}
 
+# Abstract
+${abstract}
+
 # Categories
 ${categories.join(', ')}
 
@@ -90,9 +93,6 @@ ${categories.join(', ')}
 - arXiv ID: ${arxivId}
 ${doi ? `- DOI: ${doi}` : ''}
 ${journalRef ? `- Journal Reference: ${journalRef}` : ''}
-
-# Abstract
-${abstract}
 
 ${bibtexContent ? `# BibTeX
 ${bibtexContent}
