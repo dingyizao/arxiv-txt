@@ -24,11 +24,11 @@ llm -s "Explain this paper like I'm 5"
 
 
   return (
-    <div className="container mx-auto px-4 py-12 flex flex-col items-center">
-      <h1 className="text-4xl font-bold mb-8">
+    <div className="container mx-auto px-4 py-8 flex flex-col items-center">
+      <h1 className="text-4xl font-bold mb-4">
         arXiv-txt.org
       </h1>
-      <p className="text-lg opacity-90 mb-8">
+      <p className="text-lg opacity-90 mb-6">
         LLM-friendly arXiv papers | <a href="https://github.com/jerpint/arxiv-txt" className="link inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
           GitHub
           <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -37,10 +37,10 @@ llm -s "Explain this paper like I'm 5"
         </a>
       </p>
 
-      <div className="card bg-base-100 w-full max-w-2xl shadow-xl mb-8">
-        <div className="card-body">
-          <h2 className="card-title">How It Works</h2>
-          <p className="mb-6">
+      <div className="card bg-base-100 w-full max-w-2xl shadow-xl mb-6">
+        <div className="card-body py-6">
+          <h2 className="card-title mb-2">How It Works</h2>
+          <p className="mb-4">
             Replace <code className="badge badge-ghost">arxiv.org</code> to
             <code className="badge badge-ghost ml-2">arxiv-txt.org</code>
           </p>
@@ -94,14 +94,14 @@ llm -s "Explain this paper like I'm 5"
         </div>
       </div> */}
 
-      <div className="card bg-base-100 w-full max-w-2xl shadow-xl my-16">
-        <div className="card-body">
-          <h1 className="text-2xl font-bold mb-4 text-center">
+      <div className="card bg-base-100 w-full max-w-2xl shadow-xl my-8">
+        <div className="card-body py-6">
+          <h1 className="text-2xl font-bold mb-3 text-center">
             API Usage Guide
           </h1>
 
-          <div className="space-y-4">
-            <p className="text-center mb-6">
+          <div className="space-y-3">
+            <p className="text-center mb-4">
               arXiv-txt is designed to be API-friendly
             </p>
 
@@ -131,11 +131,11 @@ llm -s "Explain this paper like I'm 5"
             </div>
           </div>
 
-          <div className="divider my-8"></div>
+          <div className="divider my-6"></div>
 
-          <div className="mb-8">
-            <h3 id="python" className="text-xl font-semibold mb-4">Python</h3>
-            <p className="mb-4"> Checkout this example <a href="https://github.com/jerpint/arxiv-txt/blob/main/examples/python/lit_review.ipynb" target="_blank" rel="noopener noreferrer" className="link link-primary">Jupyter Notebook</a> or use the arxiv-txt API directly </p>
+          <div className="mb-6">
+            <h3 id="python" className="text-xl font-semibold mb-3">Python</h3>
+            <p className="mb-3"> Checkout this example <a href="https://github.com/jerpint/arxiv-txt/blob/main/examples/python/lit_review.ipynb" target="_blank" rel="noopener noreferrer" className="link link-primary">Jupyter Notebook</a> or use the arxiv-txt API directly </p>
 
             <div className="mockup-code relative overflow-x-auto rounded-lg shadow-md">
               <Highlight theme={themes.gruvboxMaterialDark} code={pythonCode} language="python">
