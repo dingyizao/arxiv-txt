@@ -95,36 +95,49 @@ llm -s "Explain this paper like I'm 5"
       </div> */}
 
       <div className="card bg-base-100 w-full max-w-2xl shadow-xl my-16">
-        <h1 className="text-2xl font-bold text-center">
-          API Usage Guide
-        </h1>
         <div className="card-body">
-          {/* <h2 className="card-title">API Usage Guide</h2> */}
+          <h1 className="text-2xl font-bold mb-4 text-center">
+            API Usage Guide
+          </h1>
+
           <div className="space-y-4">
-            <p>
-              arXiv-txt is designed to be API-friendly <br />
-              Use <code className="badge badge-ghost">https://arxiv-txt.org/raw/abs/[id]</code> to get a markdown Summary.
-              <br />
-              Use <code className="badge badge-ghost">https://arxiv-txt.org/raw/pdf/[id]</code> to get the full paper content.
+            <p className="text-center mb-6">
+              arXiv-txt is designed to be API-friendly
             </p>
 
-            <div className="mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <p className="mb-2">Fetch a text summary:</p>
+                <div className="bg-base-200 p-4 rounded-lg">
+                  <code className="badge badge-ghost p-3 w-full flex justify-center">arxiv-txt.org/raw/abs/[id]</code>
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2">Fetch the full paper content:</p>
+                <div className="bg-base-200 p-4 rounded-lg">
+                  <code className="badge badge-ghost p-3 w-full flex justify-center">arxiv-txt.org/raw/pdf/[id]</code>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6">
               <div className="text-sm opacity-75 mb-2">Try it out:</div>
-              <div className="p-3 bg-base-300 rounded-lg">
-                <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="link link-primary block">
+              <div className="p-4 bg-base-300 rounded-lg hover:bg-base-200 transition-colors">
+                <a href="https://arxiv-txt.org/raw/abs/1706.03762" className="link link-primary block text-center">
                   https://arxiv-txt.org/raw/abs/1706.03762
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="divider"></div>
+          <div className="divider my-8"></div>
 
-          <div className="mb-6">
-            <h3 id="python" className="text-xl font-semibold mb-3">Python</h3>
-            <p> Checkout this example <a href="https://github.com/jerpint/arxiv-txt/blob/main/examples/python/lit_review.ipynb" target="_blank" rel="noopener noreferrer" className="link link-primary">Jupyter Notebook</a> or use the arxiv-txt API directly </p>
-            <br />
-            <div className="mockup-code relative overflow-x-auto rounded-lg">
+          <div className="mb-8">
+            <h3 id="python" className="text-xl font-semibold mb-4">Python</h3>
+            <p className="mb-4"> Checkout this example <a href="https://github.com/jerpint/arxiv-txt/blob/main/examples/python/lit_review.ipynb" target="_blank" rel="noopener noreferrer" className="link link-primary">Jupyter Notebook</a> or use the arxiv-txt API directly </p>
+
+            <div className="mockup-code relative overflow-x-auto rounded-lg shadow-md">
               <Highlight theme={themes.gruvboxMaterialDark} code={pythonCode} language="python">
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                   <pre className={`${className} p-6 whitespace-pre`} style={{...style, lineHeight: 1.5}}>
@@ -142,8 +155,8 @@ llm -s "Explain this paper like I'm 5"
           </div>
 
           <div>
-            <h3 id="cli" className="text-xl font-semibold mb-3">Command Line</h3>
-            <div className="mockup-code relative overflow-x-auto rounded-lg">
+            <h3 id="cli" className="text-xl font-semibold mb-4">Command Line</h3>
+            <div className="mockup-code relative overflow-x-auto rounded-lg shadow-md">
               <Highlight theme={themes.gruvboxMaterialDark} code={bashCode} language="python">
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                   <pre className={`${className} p-6 whitespace-pre`} style={{...style, lineHeight: 1.5}}>
