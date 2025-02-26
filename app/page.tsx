@@ -1,5 +1,6 @@
 import { Highlight, themes } from "prism-react-renderer";
 import Layout from '@/app/components/Layout';
+import ArxivInput from '@/app/components/ArxivInput';
 
 export default function Home() {
   const pythonCode = `import requests
@@ -37,62 +38,7 @@ llm -s "Explain this paper like I'm 5"
         </a>
       </p>
 
-      <div className="card bg-base-100 w-full max-w-2xl shadow-xl mb-6">
-        <div className="card-body py-6">
-          <h2 className="card-title mb-2">How It Works</h2>
-          <p className="mb-4">
-            Replace <code className="badge badge-ghost">arxiv.org</code> to
-            <code className="badge badge-ghost ml-2">arxiv-txt.org</code>
-          </p>
-
-          <div className="bg-base-200 p-4 rounded-lg">
-            {/* <div className="text-sm opacity-75 mb-2">Original URL:</div> */}
-            {/* <a href="https://arxiv.org/abs/1706.03762" className="link link-primary block mb-4"> */}
-              {/* https://arxiv.org/abs/1706.03762 */}
-            {/* </a> */}
-
-            <div className="text-sm opacity-75 mb-2">Try it out:</div>
-            <div className="p-3 bg-base-300 rounded-lg">
-              <a href="/abs/1706.03762" className="link link-primary block">
-                https://arxiv-txt.org/abs/1706.03762
-              </a>
-              {/* <span className="text-sm opacity-75">Gets full paper content</span> */}
-            </div>
-          </div>
-
-          {/* <p className="mt-4">For raw text API access, see API usage guide below.</p> */}
-        </div>
-      </div>
-
-      {/* <div className="w-full max-w-2xl mt-10">
-        <h2 className="text-2xl font-bold mb-6">Try Some Examples</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
-            href="/abs/1706.03762"
-            className="btn btn-primary"
-          >
-            arxiv-txt.org/
-            <br />
-            abs/1706.03762
-          </a>
-          <a
-            href="/abs/2402.17764"
-            className="btn btn-primary"
-          >
-            arxiv-txt.org/
-            <br />
-            abs/2402.17764
-          </a>
-          <a
-            href="/abs/2501.12948"
-            className="btn btn-primary"
-          >
-            arxiv-txt.org/
-            <br />
-            abs/2501.12948
-          </a>
-        </div>
-      </div> */}
+      <ArxivInput />
 
       <div className="card bg-base-100 w-full max-w-2xl shadow-xl my-8">
         <div className="card-body py-6">
