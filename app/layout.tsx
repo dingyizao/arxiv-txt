@@ -7,8 +7,8 @@ import { Analytics } from '@vercel/analytics/next';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'arXiv-txt.org - LLM-friendly arXiv papers',
-  description: 'Convert arXiv papers into LLM-friendly formats',
+  title: '改读',
+  description: '随便读',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
