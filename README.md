@@ -1,4 +1,4 @@
-# arXiv-txt.org
+# AI reading tools
 
 A simple tool that makes arXiv papers instantly available in LLM-friendly formats by just changing the URL.
 
